@@ -13,6 +13,12 @@ from collections import OrderedDict
 from jinja2 import Environment, FileSystemLoader
 from flask import request, jsonify, make_response, Flask, redirect, url_for
 
+#
+#	This is how long we wait after scanning all /info endpoints before
+#	trying again ...
+#
+SLEEP_INTERVAL = 10
+
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
@@ -89,7 +95,7 @@ class Refresh(object):
 		scanning = True
 
 		while True:
-			time.sleep(10)
+			time.sleep(SLEEP_INTERVAL)
 			count = 0
 			immutable_matrix = list(matrix)
 			for app in immutable_matrix:
