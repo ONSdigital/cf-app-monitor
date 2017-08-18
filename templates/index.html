@@ -276,6 +276,17 @@
                 ajax: newURL,
                 fnDrawCallback: function (oSettings) {
                   num_columns = oSettings.aoColumns.length;
+                },
+                fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                  $(nRow).children().each(function(index, td) {
+                    if( $(td).html() == 'DOWN or no endpoint' ) {
+                      $(td).css("background-color", "#f7dc79");
+                      $(td).css("color", "#000");
+                    } else {
+                      $(td).css("background-color", "#fff");
+                      $(td).css("color", "#73879C");                      
+                    }
+                  });
                 }
             });
 
